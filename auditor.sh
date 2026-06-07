@@ -7,26 +7,81 @@ RED="\x1b[31m"
 GREEN="\033[32m"
 
 # Search SUID files
-echo -e "${YELLOW} [*] Scanning for dangerous SUID binaries...${NC}"
+
 search_suid() {
-  find / -type f -perm -4000 2> /dev/null | grep -v "/proc"
+  echo -e "${YELLOW} [*] Scanning for dangerous SUID binaries...${NC}"
+  echo "------------------------------"
+  local suid_var
+  suid_var=$(find / -type f -perm -4000 2> /dev/null | grep -v "/proc")
+
+  if [ -z "$suid_var" ]; then
+    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"
+  else
+    echo -e "${RED} [CRITICAL] Vulnerable files with SUID found. ${NC}"
+    echo "$suid_var"
+  fi
+
+  echo "------------------------------"
+
 }
 
 # World-writable_files
-echo -e "${YELLOW} [*] Scanning for world-writable files...${NC}"
 world_writable() {
-  find / -type f -perm -0002 2> /dev/null | grep -v "/proc"
+  echo -e "${YELLOW} [*] Scanning for world-writable files...${NC}"
+  echo "------------------------------"
+
+  local ww_var
+  ww_var=$(find / -type f -perm -0002 2> /dev/null | grep -v "/proc")
+  
+  if [ -z "$ww_var" ]; then
+    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"
+  else
+    echo -e "${RED} [CRITICAL] World-writable files found. ${NC}"
+    echo "$ww_var"
+  fi
+
+  echo "------------------------------"
+
 }
 
 # Check for empty password
-echo -e "${YELLOW} [*] Checing /etc/shadow for empty password...${NC}"
 empty_password() {
-  awk -F: '$2 == "" { print $1 }' /etc/shadow
+  echo -e "${YELLOW} [*] Checing /etc/shadow for empty password...${NC}"
+  echo "------------------------------"
+
+  local empass_var
+  empass_var=$(awk -F: '$2 == "" { print $1 }' /etc/shadow)
+  
+  if [ -z "$empass_var" ]; then
+    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"
+  else
+    echo -e "${RED} [CRITICAL] Empty passwords found. ${NC}"
+    echo "$empass_var"
+  fi
+
+  echo "------------------------------"
 }
 
 # Sudoers configuration
 sudoers() {
-  sudo grep -r "NOPASSWD" /etc/sudoers /etc/sudoers.d/ 2> /dev/null | grep -v "^#"
+    echo -e "${YELLOW}[*] Analyzing sudoers misconfigurations...${NC}"
+    echo "------------------------------------------------"
+    
+    # 1. Сохраняем вывод команды в ЛОКАЛЬНУЮ переменную
+    local sudo_errors
+    sudo_errors=$(sudo grep -r "NOPASSWD" /etc/sudoers /etc/sudoers.d/ 2>/dev/null | grep -v ":#")
+    
+    # 2. Проверяем: если переменная ПУСТАЯ (-z)
+    if [ -z "$sudo_errors" ]; then
+        echo -e "${GREEN}[OK] No active NOPASSWD rules found. System is safe.${NC}"
+    else
+        # 3. Если НЕ пустая — включаем тревогу и выводим то, что нашли
+        echo -e "${RED}[CRITICAL] Dangerous NOPASSWD rules detected!${NC}"
+        echo "$sudo_errors"
+    fi
+    
+    echo "------------------------------------------------"
+    echo ""
 }
 
 # Check root
