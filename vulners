@@ -6,11 +6,21 @@ YELLOW="\x1b[33m"
 RED="\x1b[31m"
 GREEN="\033[32m"
 
-# Search SUID files
 
+# help message
+show_help() {
+    echo "Usage: vulners [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "  -h, --help    Show this help message and exit"
+    echo "  -l, --log     Run audit and save output to a log file"
+    echo ""
+}
+
+# Search SUID files
 search_suid() {
   echo -e "${YELLOW} [*] Scanning for dangerous SUID binaries...${NC}"
-  echo "------------------------------"
+  echo "--------------------------------------------------"
   local suid_var
   suid_var=$(find / -type f -perm -4000 2> /dev/null | grep -v "/proc")
 
@@ -21,14 +31,14 @@ search_suid() {
     echo "$suid_var"
   fi
 
-  echo "------------------------------"
+  echo "--------------------------------------------------"
 
 }
 
 # World-writable_files
 world_writable() {
   echo -e "${YELLOW} [*] Scanning for world-writable files...${NC}"
-  echo "------------------------------"
+  echo "--------------------------------------------------"
 
   local ww_var
   ww_var=$(find / -type f -perm -0002 2> /dev/null | grep -v "/proc")
@@ -40,14 +50,14 @@ world_writable() {
     echo "$ww_var"
   fi
 
-  echo "------------------------------"
+  echo "--------------------------------------------------"
 
 }
 
 # Check for empty password
 empty_password() {
   echo -e "${YELLOW} [*] Checing /etc/shadow for empty password...${NC}"
-  echo "------------------------------"
+  echo "--------------------------------------------------"
 
   local empass_var
   empass_var=$(awk -F: '$2 == "" { print $1 }' /etc/shadow)
@@ -59,7 +69,7 @@ empty_password() {
     echo "$empass_var"
   fi
 
-  echo "------------------------------"
+  echo "--------------------------------------------------"
 }
 
 # Sudoers configuration
@@ -91,15 +101,37 @@ check_root() {
         exit 1
     fi
 }
-check_root_res=$(check-root)
-  
-main() {
-  clear
-  check_root
-  search_suid
-  world_writable
-  empty_password
-  sudoers
+check_root_res=$(check_root)
+
+# run func
+run_audit() {
+  clear          
+  check_root     
+  search_suid    
+  world_writable 
+  empty_password 
+  sudoers        
 }
 
-main
+main() {
+  case "$1" in
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+    -l|--log)
+      echo "logging"
+      :
+      ;;
+    "")
+      run_audit
+      ;;
+    *)
+      echo -e "${RED} Error: Unknown argument: '$1'${NC}"
+      show_help
+      exit 0
+      ;;
+  esac
+}
+
+main $1
