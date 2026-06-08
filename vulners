@@ -6,6 +6,20 @@ YELLOW="\x1b[33m"
 RED="\x1b[31m"
 GREEN="\033[32m"
 
+# Loading Animation
+spiner() {
+  local pid=$1
+  local spin='-\|/'
+  local i=0
+
+  while kill -0 "$pid" 2>/dev/null; do
+    i=$(( (i+1) % 4 ))
+    printf "\r[%c] Scanning system, please wait..." "${spin:$i:1}"
+    sleep 0.1
+  done
+
+  printf "\r [+] Scanning complete!                      \n"
+}
 
 # help message
 show_help() {
@@ -19,10 +33,15 @@ show_help() {
 
 # Search SUID files
 search_suid() {
+  echo ""
   echo -e "${YELLOW} [*] Scanning for dangerous SUID binaries...${NC}"
   echo "--------------------------------------------------"
+
+
   local suid_var
-  suid_var=$(find / -type f -perm -4000 2> /dev/null | grep -v "/proc")
+  suid_var=$(find / -type f -perm -4000 2> /dev/null | grep -v "/proc") &
+
+  spiner $!
 
   if [ -z "$suid_var" ]; then
     echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"
@@ -37,11 +56,14 @@ search_suid() {
 
 # World-writable_files
 world_writable() {
+  echo ""
   echo -e "${YELLOW} [*] Scanning for world-writable files...${NC}"
   echo "--------------------------------------------------"
 
   local ww_var
-  ww_var=$(find / -type f -perm -0002 2> /dev/null | grep -v "/proc")
+  ww_var=$(find / -type f -perm -0002 2> /dev/null | grep -v "/proc") &
+
+  spiner $!
   
   if [ -z "$ww_var" ]; then
     echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"
@@ -56,6 +78,7 @@ world_writable() {
 
 # Check for empty password
 empty_password() {
+  echo ""
   echo -e "${YELLOW} [*] Checing /etc/shadow for empty password...${NC}"
   echo "--------------------------------------------------"
 
@@ -72,8 +95,13 @@ empty_password() {
   echo "--------------------------------------------------"
 }
 
+
+
+
+
 # Sudoers configuration
 sudoers() {
+    echo ""
     echo -e "${YELLOW}[*] Analyzing sudoers misconfigurations...${NC}"
     echo "------------------------------------------------"
     
@@ -120,8 +148,18 @@ main() {
       exit 0
       ;;
     -l|--log)
-      echo "logging"
-      :
+      LOG_FILE="/var/log/vulners.log"
+      echo -e "${YELLOW}[*] Starting security audit...${NC}"
+      echo -e "${YELLOW}[*] All details will be saved to: $LOG_FILE${NC}"
+      echo "------------------------------------------------"
+      
+      run_audit > "$LOG_FILE" 2>&1
+
+
+
+      echo -e "${GREEN}[+] Audit successfully finished!${NC}"
+      echo -e "${GREEN}[+] To view the results, run:${NC} cat $LOG_FILE"
+      echo "------------------------------------------------"
       ;;
     "")
       run_audit
