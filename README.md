@@ -17,8 +17,8 @@ Clone the repository and run the installation script:
 ```bash
 git clone https://github.com/AlgoZak/VulnerS.git
 cd VulnerS
-chmod +x install.sh
-sudo ./install.sh
+chmod +x install
+sudo ./install
 ```
 ## Uninstallation
 
