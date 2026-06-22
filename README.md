@@ -1,7 +1,7 @@
 # VulnerS
 
 A minimalistic Bash tool for basic local Linux security auditing.
-Checks the system for dangerous SUID files, access rights (world-writable), empty passwords, and vulnerable sudo configs.
+Checks the system for dangerous SUID files, access rights (world-writable), empty passwords, etc.
 
 ## Using
 
