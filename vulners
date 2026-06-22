@@ -6,6 +6,9 @@ YELLOW="\x1b[33m"
 RED="\x1b[31m"
 GREEN="\033[32m"
 
+#Dangerous Capabilities list
+DANGEROUS_CAPS="cap_sys_admin|cap_sys_ptrace|cap_sys_module|cap_dac_override|cap_chown|cap_fowner"
+
 # Loading Animation
 spiner() {
   local pid=$1
@@ -18,7 +21,7 @@ spiner() {
     sleep 0.1
   done
 
-  printf "\r [+] Scanning complete!                      \n"
+  printf "                      \n"
 }
 
 # help message
@@ -61,7 +64,6 @@ world_writable() {
   echo "--------------------------------------------------"
 
   tmpfile=$(mktemp)
-  find / -type f -perm -4000 2>/dev/null | grep -v "/proc" > "$tmpfile" &
   find / -type f -perm -o+w 2>/dev/null | grep -v "/proc" | grep -v /sys > "$tmpfile" &
   spiner $!
   suid_var=$(cat "$tmpfile")
@@ -85,10 +87,31 @@ echo_sticky_tmp() {
   echo "--------------------------------------------------"
   sticky_info=$(ls -ld /tmp | awk '{print substr($1,length($1)-1,1)}')
   if [[ "$sticky_info" == "t" || "$sticky_info" == "T" ]]; then
-    echo -e "${GREEN} [OK] ${NC}" 
+    echo -e "${GREEN} [OK] No vulnerabilities found.  ${NC}" 
   else
     echo -e "${RED}sticky bit is missing on /tmp${NC}" 
   fi
+}
+
+#check Dangerous Capabilities
+check_capabilities() {
+  echo ""
+  echo -e "${YELLOW} [*] Checking Dangerous Capabilities...${NC}"
+  echo "--------------------------------------------------"
+
+  tmpfile=$(mktemp)
+  getcap -r / 2>/dev/null > "$tmpfile" &
+  spiner $!
+  all_cap=$(cat "$tmpfile")
+  rm -f "$tmpfile"
+  cap_res=$(echo "$all_cap" | grep -E "$DANGEROUS_CAPS")
+  if [ -z "$cap_res" ]; then
+    echo -e "${GREEN}[OK] No vulnerabilities found. ${NC}"
+  else
+    echo -e "${RED}[CRITICAL] Dangerous capabilities found. ${NC} "
+    echo "$cap_res"  
+  fi
+  echo ""
 }
 
 # Check for empty password
@@ -150,7 +173,8 @@ run_audit() {
   world_writable 
   empty_password
   echo_sticky_tmp
-  sudoers        
+  sudoers
+  check_capabilities
 }
 
 main() {
@@ -184,9 +208,5 @@ main() {
   esac
 }
 
-<<<<<<< HEAD
-main "$1"t
-=======
-main "$1"
 
->>>>>>> 52c7394 (feat: Add sticky bit check function)
+main "$1"
