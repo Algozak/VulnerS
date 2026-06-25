@@ -5,7 +5,8 @@ echo_sticky_tmp() {
   echo ""                                                              
   echo -e "${YELLOW} [*] Checking sticky bit in /tmp...${NC}"          
   echo "--------------------------------------------------"            
-  sticky_info=$(ls -ld /tmp | awk '{print substr($1,length($1)-1,1)}') 
+  sticky_info=$(ls -ld /tmp | awk '{print substr($1,length($1)-1,1)}')
+
   if [[ "$sticky_info" == "t" || "$sticky_info" == "T" ]]; then        
     echo -e "${GREEN} [OK] No vulnerabilities found.  ${NC}"           
   else                                                                 

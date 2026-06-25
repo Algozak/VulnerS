@@ -21,7 +21,7 @@ source checks/empty_password.sh
 source checks/sticky_bit.sh
 source checks/sudoers.sh
 source checks/capabilities.sh
-
+source checks/wwwsticky.sh
 
 # run func
 run_audit() {
@@ -30,6 +30,7 @@ run_audit() {
   search_suid
   search_sgid
   world_writable 
+  wwwsticky
   empty_password
   echo_sticky_tmp
   sudoers

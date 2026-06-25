@@ -7,7 +7,7 @@ Checks the system for dangerous SUID files, access rights (world-writable), empt
 
 ```bash
 sudo vulners        # Quick start of the audit
-sudo vulners -l     # Background audit with entry in /var/log/hackers.log
+sudo vulners -l     # Background audit with entry in /var/log/vulners.log
 sudo vulners -h     # Calling Help
 ```
 ## Installation
@@ -18,7 +18,7 @@ Clone the repository and run the installation script:
 git clone https://github.com/AlgoZak/VulnerS.git
 cd VulnerS
 chmod +x install
-sudo ./install
+sudo ./install.sh
 ```
 ## Uninstallation
 

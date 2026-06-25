@@ -8,7 +8,7 @@ world_writable() {
   echo -e "${YELLOW} [*] Scanning for world-writable files...${NC}"                       
   echo "--------------------------------------------------"                               
                                                                                           
-  tmpfile=$(mktemp)                                                                       
+  local tmpfile=$(mktemp)                                                                       
   find / -type f -perm -o+w 2>/dev/null | grep -v "/proc" | grep -v "/sys" > "$tmpfile" & 
   spinner $!                                                                               
   suid_var=$(cat "$tmpfile")                                                              
