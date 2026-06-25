@@ -22,6 +22,8 @@ source checks/sticky_bit.sh
 source checks/sudoers.sh
 source checks/capabilities.sh
 source checks/wwwsticky.sh
+source checks/acl_check.sh
+
 
 # run func
 run_audit() {
@@ -31,10 +33,12 @@ run_audit() {
   search_sgid
   world_writable 
   wwwsticky
+  acl_check
+  check_capabilities
   empty_password
   echo_sticky_tmp
   sudoers
-  check_capabilities
+  
 }
 
 
