@@ -3,7 +3,7 @@
 # Sudoers configuration                                                                       
 sudoers() {                                                                                   
     echo ""                                                                                   
-    echo -e "${YELLOW}[*] Analyzing sudoers misconfigurations...${NC}"                        
+    echo -e "${YELLOW} [*] Analyzing sudoers misconfigurations...${NC}"                        
     echo "------------------------------------------------"                                   
                                                                                               
     local sudo_errors                                                                         
@@ -12,9 +12,10 @@ sudoers() {
     spinner $!
                                                                                               
     if [ -z "$sudo_errors" ]; then                                                            
-        echo -e "${GREEN}[OK] No active NOPASSWD rules found. System is safe.${NC}"           
+        echo -e "${GREEN}    [OK] No active NOPASSWD rules found.${NC}"
+        sleep 0.4
     else                                                                                      
-        echo -e "${RED}[CRITICAL] Dangerous NOPASSWD rules detected!${NC}"                    
+        echo -e "${RED}    [CRITICAL] Dangerous NOPASSWD rules detected!${NC}"                    
         echo "$sudo_errors"                                                                   
     fi                                                                                        
                                                                                               

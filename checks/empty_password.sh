@@ -12,12 +12,12 @@ empty_password() {
   spinner $!
                                                                           
   if [ -z "$empass_var" ]; then                                           
-    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"               
+    echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"               
+    sleep 0.3
   else                                                                    
-    echo -e "${RED} [CRITICAL] Empty passwords found. ${NC}"              
+    echo -e "${RED}    [CRITICAL] Empty passwords found. ${NC}"              
     echo "$empass_var"                                                    
   fi                                                                      
                                                                           
-  echo "--------------------------------------------------"               
 }                                                                         
 

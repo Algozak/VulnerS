@@ -8,7 +8,7 @@ spinner() {
                                                                    
   while kill -0 "$pid" 2>/dev/null; do                             
     i=$(( (i+1) % 4 ))                                             
-    printf "\r[%c] Scanning system, please wait..." "${spin:$i:1}" 
+    printf "\r    [%c] Scanning system, please wait..." "${spin:$i:1}" 
     sleep 0.1                                                      
   done                                                             
                                                                    

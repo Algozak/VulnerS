@@ -14,12 +14,11 @@ wwwsticky() {
   rm -f "$tmpfile"
 
   if [ -z "$www_var" ]; then
-    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}" 
+    echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}" 
   else
-    echo -e "${RED} [CRITICAL] world-writable dirs without sticky bit found. ${NC}"
+    echo -e "${RED}    [CRITICAL] world-writable dirs without sticky bit found. ${NC}"
     echo "$www_var"
   fi
 
-  echo "--------------------------------------------------" 
 
 } 

@@ -8,9 +8,10 @@ echo_sticky_tmp() {
   sticky_info=$(ls -ld /tmp | awk '{print substr($1,length($1)-1,1)}')
 
   if [[ "$sticky_info" == "t" || "$sticky_info" == "T" ]]; then        
-    echo -e "${GREEN} [OK] No vulnerabilities found.  ${NC}"           
+    echo -e "${GREEN}    [OK] No vulnerabilities found.  ${NC}"           
+    sleep 0.3
   else                                                                 
-    echo -e "${RED}sticky bit is missing on /tmp${NC}"                 
+    echo -e "${RED}    sticky bit is missing on /tmp${NC}"                 
   fi                                                                   
 }                                                                      
 

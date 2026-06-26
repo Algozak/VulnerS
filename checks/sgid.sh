@@ -15,13 +15,12 @@ search_sgid() {
   spinner $!                                                               
                                                                            
   if [ -z "$suid_var" ]; then                                              
-    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}"                
+    echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                
   else                                                                     
-    echo -e "${RED} [CRITICAL] Vulnerable files with SGID found. ${NC}"    
+    echo -e "${RED}    [CRITICAL] Vulnerable files with SGID found. ${NC}"    
     echo "$suid_var"                                                       
   fi                                                                       
                                                                            
-  echo "--------------------------------------------------"                
                                                                            
 }                                                                          
 

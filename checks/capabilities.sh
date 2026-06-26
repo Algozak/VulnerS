@@ -16,9 +16,9 @@ check_capabilities() {
   rm -f "$tmpfile"                                                  
   cap_res=$(echo "$all_cap" | grep -E "$DANGEROUS_CAPS")            
   if [ -z "$cap_res" ]; then                                        
-    echo -e "${GREEN}[OK] No vulnerabilities found. ${NC}"          
+    echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"          
   else                                                              
-    echo -e "${RED}[CRITICAL] Dangerous capabilities found. ${NC} " 
+    echo -e "${RED}    [CRITICAL] Dangerous capabilities found. ${NC} " 
     echo "$cap_res"                                                 
   fi                                                                
   echo ""                                                           

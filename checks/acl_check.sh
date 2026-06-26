@@ -12,15 +12,14 @@ acl_check() {
   spinner $!
 
   if [ -s "$tmpfile" ]; then
-    echo -e "${GREEN} [OK] No vulnerabilities found. ${NC}" 
+    echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}" 
   else
-    echo -e "${RED} [CRITICAL] Extended ACLs found.${NC}"
+    echo -e "${RED}    [CRITICAL] Extended ACLs found.${NC}"
     acl_info=$(grep "^# file:" "$tmpfile" | sed 's/# file: //')
     echo "$acl_info"
   fi
 
   rm -f "$tmpfile"
-  echo "--------------------------------------------------" 
 
 }
 
