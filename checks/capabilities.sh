@@ -18,7 +18,7 @@ check_capabilities() {
   if [ -z "$cap_res" ]; then                                        
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"          
   else                                                              
-    echo -e "${RED}    [CRITICAL] Dangerous capabilities found. ${NC} " 
+    echo -e "\n${RED}    [CRITICAL] Dangerous capabilities found. ${NC} " 
     echo "$cap_res"                                                 
   fi                                                                
   echo ""                                                           

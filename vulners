@@ -24,7 +24,8 @@ source checks/sudoers.sh
 source checks/capabilities.sh
 source checks/wwwsticky.sh
 source checks/acl_check.sh
-
+source checks/writable_units.sh
+source checks/execstart_check.sh
 
 # run func
 run_audit() {
@@ -35,11 +36,13 @@ run_audit() {
   world_writable 
   wwwsticky
   acl_check
+  writable-units 
   check_capabilities
   empty_password
   echo_sticky_tmp
   sudoers
-  
+  execstart
+
 }
 
 

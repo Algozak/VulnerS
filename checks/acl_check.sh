@@ -17,6 +17,7 @@ acl_check() {
     echo -e "${RED}    [CRITICAL] Extended ACLs found.${NC}"
     acl_info=$(grep "^# file:" "$tmpfile" | sed 's/# file: //')
     echo "$acl_info"
+    sleep 0.5
   fi
 
   rm -f "$tmpfile"

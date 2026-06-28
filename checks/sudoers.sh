@@ -13,13 +13,12 @@ sudoers() {
                                                                                               
     if [ -z "$sudo_errors" ]; then                                                            
         echo -e "${GREEN}    [OK] No active NOPASSWD rules found.${NC}"
-        sleep 0.4
+        sleep 1
     else                                                                                      
         echo -e "${RED}    [CRITICAL] Dangerous NOPASSWD rules detected!${NC}"                    
         echo "$sudo_errors"                                                                   
     fi                                                                                        
-                                                                                              
-    echo "------------------------------------------------"                                   
+                                                                                                                                 
     echo ""                                                                                   
 }                                                                                             
 

@@ -17,8 +17,8 @@ world_writable() {
   if [ -z "$wwf_var" ]; then                                                             
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                               
   else                                                                                    
-    echo -e "${RED}    [CRITICAL] World-writable files found. ${NC}"                         
-    echo "$wwf_var"
+    echo -e "${RED}    [CRITICAL] World-writable files found. \n${NC}"                         
+    echo "    --- $wwf_var"
     sleep 0.8
   fi                                                                                      
                                                                                           

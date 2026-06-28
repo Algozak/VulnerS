@@ -9,7 +9,7 @@ echo_sticky_tmp() {
 
   if [[ "$sticky_info" == "t" || "$sticky_info" == "T" ]]; then        
     echo -e "${GREEN}    [OK] No vulnerabilities found.  ${NC}"           
-    sleep 0.3
+    sleep 1 
   else                                                                 
     echo -e "${RED}    sticky bit is missing on /tmp${NC}"                 
   fi                                                                   

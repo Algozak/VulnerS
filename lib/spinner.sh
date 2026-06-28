@@ -10,6 +10,7 @@ spinner() {
     i=$(( (i+1) % 4 ))                                             
     printf "\r    [%c] Scanning system, please wait..." "${spin:$i:1}" 
     sleep 0.1                                                      
+    printf "\r\033[K" ""
   done                                                             
                                                                    
   printf "                      \n"                                
