@@ -36,7 +36,7 @@ done
 %{_datadir}/vulners/lib/*.sh
 
 %changelog
-* Fri Jul 10 2026 Your Name <you@example.com> - 1.0-1
+* Fri Jul 10 2026 Your Name <harutyunyanvazgen10@gmail.com.com> - 1.0-1
 - Первый релиз
 
 
