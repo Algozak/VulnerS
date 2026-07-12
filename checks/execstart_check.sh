@@ -28,7 +28,7 @@ execstart() {
   done < <(grep -rh "^ExecStart=" /etc/systemd/system)
 
   if [ "$found_vuln" -eq 0 ]; then
-    echo -e "${GREEN}    [OK] No vulnerabilities found.\n${NC}"
+    echo -e "${GREEN}\n    [OK] No vulnerabilities found.\n${NC}"
   fi
 }
 

@@ -14,18 +14,13 @@ check_root() {
     fi
 }
 
-source lib/help.sh
-source checks/suid.sh
-source checks/sgid.sh
-source checks/world_writable.sh
-source checks/empty_password.sh
-source checks/sticky_bit.sh
-source checks/sudoers.sh
-source checks/capabilities.sh
-source checks/wwwsticky.sh
-source checks/acl_check.sh
-source checks/writable_units.sh
-source checks/execstart_check.sh
+VULNERS_LIB="/usr/share/vulners"
+
+for check in "$VULNERS_LIB"/checks/*.sh; do
+    source "$check"
+done
+source "$VULNERS_LIB/lib/help.sh"
+source "$VULNERS_LIB/lib/spinner.sh"
 
 # run func
 run_audit() {
