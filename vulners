@@ -19,8 +19,7 @@ VULNERS_LIB="/usr/share/vulners"
 for check in "$VULNERS_LIB"/checks/*.sh; do
     source "$check"
 done
-source "$VULNERS_LIB/lib/help.sh"
-source "$VULNERS_LIB/lib/spinner.sh"
+
 
 # run func
 run_audit() {
@@ -35,8 +34,8 @@ run_audit() {
   check_capabilities
   empty_password
   echo_sticky_tmp
-  sudoers
   execstart
+  sudoers
 
 }
 
@@ -54,7 +53,7 @@ main() {
       echo "------------------------------------------------"
       
       run_audit > "$LOG_FILE" 2>&1
-
+      
       echo -e "${GREEN}[+] Audit successfully finished!${NC}"
       echo -e "${GREEN}[+] To view the results, run:${NC} cat $LOG_FILE"
       echo "------------------------------------------------"

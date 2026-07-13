@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source lib/spinner.sh
+
 
 # Search SUID files                                                       
 search_suid() {                                                           

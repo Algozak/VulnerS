@@ -1,21 +1,21 @@
 Name:           vulners
 Version:        1.0
 Release:        1%{?dist}
-Summary:        Инструмент проверки уязвимостей конфигурации системы
+Summary:        A tool for checking system configuration vulnerabilities 
 
 License:        MIT
 Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
 %description
-VulnerS — набор проверок системы на типичные проблемы безопасности:
+VulnerS — a set of system checks for typical security issues:
 SUID/SGID, ACL, права sudoers, capabilities, world-writable файлы и другое.
 
 %prep
 %setup -q
 
 %build
-# сборка не требуется, чистый bash
+#dont need
 
 %install
 install -Dm755 vulners %{buildroot}%{_bindir}/vulners
@@ -37,7 +37,7 @@ done
 
 %changelog
 * Fri Jul 10 2026 Your Name <harutyunyanvazgen10@gmail.com.com> - 1.0-1
-- Первый релиз
+- First Release
 
 
 

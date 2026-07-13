@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source lib/spinner.sh 
+ 
 
 # World-writable_files                                                                    
 world_writable() {                                                                        

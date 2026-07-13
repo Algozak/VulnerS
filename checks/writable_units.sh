@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source lib/spinner.sh                                                                            
+                                                                           
                                                                                                  
 # Writable-units                                                                            
 writable-units() {                                                                               
