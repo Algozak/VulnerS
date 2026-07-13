@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /usr/share/vulners/lib/spinner.sh
+
 #ACL check
 acl_check() {
   echo ""                                                                                  
