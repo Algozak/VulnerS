@@ -24,4 +24,4 @@ rpmbuild -ba ~/rpmbuild/SPECS/${NAME}.spec
 
 echo ""
 echo "Готово: ~/rpmbuild/RPMS/noarch/${NAME}-${VERSION}-*.rpm"
-echo "Для установки: sudo dnf reinstall ~/rpmbuild/RPMS/noarch/${NAME}-${VERSION}-*.rpm"arch/${NAME}-${VERSION}-*.rpm"
+
