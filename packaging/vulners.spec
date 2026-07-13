@@ -1,5 +1,5 @@
 Name:           vulners
-Version:        1.0
+Version:        1.1
 Release:        1%{?dist}
 Summary:        A tool for checking system configuration vulnerabilities 
 
@@ -36,7 +36,11 @@ done
 %{_datadir}/vulners/lib/*.sh
 
 %changelog
-* Fri Jul 10 2026 Your Name <harutyunyanvazgen10@gmail.com.com> - 1.0-1
+* Mon Jul 13 2026 algozak <harutyunyanvazgen10@gmail.com.com> - 1.1-1
+- Fixed incorrect flag handling (-h, -l)
+
+%changelog
+* Sun Jul 12 2026 algozak <harutyunyanvazgen10@gmail.com.com> - 1.0-1
 - First Release
 
 
