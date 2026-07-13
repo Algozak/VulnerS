@@ -39,7 +39,6 @@ done
 * Mon Jul 13 2026 algozak <harutyunyanvazgen10@gmail.com.com> - 1.1-1
 - Fixed incorrect flag handling (-h, -l)
 
-%changelog
 * Sun Jul 12 2026 algozak <harutyunyanvazgen10@gmail.com.com> - 1.0-1
 - First Release
 
