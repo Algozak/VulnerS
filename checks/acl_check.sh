@@ -10,10 +10,11 @@ acl_check() {
 
   local tmpfile=$(mktemp)
 
-  getfacl -Rsp / 2>/dev/null > "$tmpfile" &
+  ( getfacl -Rsp / 2>/dev/null > "$tmpfile" ) &
   spinner $!
 
-  if [ -s "$tmpfile" ]; then
+  acl_var=$(cat "$tmpfile")
+  if [ -z "$acl_var" ]; then
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}" 
   else
     echo -e "${RED}    [CRITICAL] Extended ACLs found.${NC}"

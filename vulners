@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Что стоит исправить в скрипте
+#1. Whitelist для SUID/SGID (мы это уже обсуждали)
+#2. Для world-writable: исключить /tmp, /var/tmp по умолчанию (это ожидаемо writable)
+#   и фильтровать только "неожиданные" места типа /home, /etc, /usr
+#3. Для ACL: не бить тревогу на само наличие ACL, а парсить getfacl 
+#   и искать конкретно опасные права (например others с rwx там, где не должно быть)
+#4. Различать уровни: INFO / WARNING / CRITICAL, а не всё через один CRITICAL
+
+
 # Colors ANSI codes
 NC="\033[0m"
 YELLOW="\x1b[33m"
