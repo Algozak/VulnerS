@@ -9,7 +9,7 @@ world_writable() {
   echo "--------------------------------------------------"                               
                                                                                           
   local tmpfile=$(mktemp)                                                                       
-  find / -type f -perm -o+w 2>/dev/null | grep -v "/proc" | grep -v "/sys" > "$tmpfile" & 
+  find / -type f -perm -o+w 2>/dev/null | grep -v "/proc" | grep -v "/sys" | grep -v "/tmp" | grep -v "/var/tmp/" > "$tmpfile" & 
   spinner $!                                                                               
   wwf_var=$(cat "$tmpfile")                                                              
   rm -f "$tmpfile"                                                                        
@@ -18,7 +18,7 @@ world_writable() {
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                               
   else                                                                                    
     echo -e "${RED}    [CRITICAL] World-writable files found. \n${NC}"                         
-    echo "    --- $wwf_var"
+    echo "$wwf_var"
     sleep 0.8
   fi                                                                                      
                                                                                           
