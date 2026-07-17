@@ -21,7 +21,7 @@ empty passwords, misconfigured sudoers, dangerous capabilities, and more.
 Download the latest `.rpm` package from the [Releases](https://github.com/AlgoZak/VulnerS/releases) page and install it:
 
 ```bash
-sudo dnf install vulners-1.0-1.noarch.rpm
+sudo dnf install vulners-1.*.noarch.rpm
 ```
 
 ## Usage
