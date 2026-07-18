@@ -7,7 +7,14 @@ search_sgid() {
   echo ""                                                                  
   echo -e "${YELLOW} [*] Scanning for dangerous SGID binaries...${NC}"     
   echo "--------------------------------------------------"                
-                                                                           
+
+  
+  local whitelist=(
+    "/usr/bin/lockdev"
+    "/usr/bin/plocate"
+    "/usr/libexec/utempter/utempter"
+  )
+
   local tmpfile
   tmpfile=$(mktemp)
   local sgid_var          
@@ -16,9 +23,9 @@ search_sgid() {
                                                                            
   spinner $!                                                             
 
-  sgid_var=$(cat "$tmpfile")
-  rm -f "$tmpfile"
-                                                                           
+  sgid_var=$(comm -23 <(sort "$tmpfile") <(printf '%s\n' "${whitelist[@]}" | sort))
+  rm -f "$tmpfile"              
+
   if [ -z "$sgid_var" ]; then                                              
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                
   else                                                                     
