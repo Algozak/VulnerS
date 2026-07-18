@@ -36,6 +36,7 @@ done
 %{_datadir}/vulners/lib/*.sh                                                    
                                                                                 
 %changelog                                                                      
+
 * Sat Jul 18 2026 algozak <harutyunyanvazgen10@gmail.com> - 1.2-1               
 - Critical errors of some checks have been fixed.                               
                                                                                 
