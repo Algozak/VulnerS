@@ -42,24 +42,11 @@ sudo dnf remove vulners
 
 If you want to build the RPM package yourself instead of using a prebuilt release:
 
-```bash
+\`\`\`
 git clone https://github.com/AlgoZak/VulnerS.git
 cd VulnerS
-
-sudo dnf install rpm-build rpmdevtools
-rpmdev-setuptree
-
-rm -rf /tmp/vulners-1.0
-mkdir -p /tmp/vulners-1.0
-cp -r checks lib vulners LICENSE README.md /tmp/vulners-1.0/
-
-cd /tmp
-tar czf vulners-1.0.tar.gz vulners-1.0/
-mv vulners-1.0.tar.gz ~/rpmbuild/SOURCES/
-
-cp ~/dev/VulnerS/packaging/vulners.spec ~/rpmbuild/SPECS/
-rpmbuild -ba ~/rpmbuild/SPECS/vulners.spec
-```
+./build.sh
+\`\`\`
 
 The resulting package will be in `~/rpmbuild/RPMS/noarch/`.
 
