@@ -2,7 +2,7 @@
 set -euo pipefail
 
 NAME="vulners"
-VERSION="1.2"
+VERSION="0.1"
 
 # Директория, где лежит сам build.sh — то есть корень проекта
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
