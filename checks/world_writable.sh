@@ -19,6 +19,7 @@ world_writable() {
   else                                                                                    
     echo -e "${RED}    [CRITICAL] World-writable files found. \n${NC}"                         
     echo "$wwf_var"
+    ((WARNING_COUNT++))
     sleep 0.8
   fi                                                                                      
                                                                                           

@@ -12,6 +12,7 @@ echo_sticky_tmp() {
     sleep 1 
   else                                                                 
     echo -e "${RED}    sticky bit is missing on /tmp${NC}"                 
+    ((WARNING_COUNT++))
   fi                                                                   
 }                                                                      
 

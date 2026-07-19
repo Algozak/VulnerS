@@ -19,7 +19,8 @@ check_capabilities() {
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"          
   else                                                              
     echo -e "\n${RED}    [CRITICAL] Dangerous capabilities found. ${NC} " 
-    echo "$cap_res"                                                 
+    echo "$cap_res"   
+    ((WARNING_COUNT++))
   fi                                                                
   echo ""                                                           
 }                                                                   

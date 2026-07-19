@@ -18,7 +18,10 @@ writable-units() {
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                                   
   else                                                                                           
     echo -e "${RED}    [CRITICAL] Writable unit files found. \n${NC}"                             
-    echo " ----- $wu_var"                                                                              
+    echo "$wu_var" | while read -r line; do
+    echo "----- $line"
+    done                                                                            
+    ((CRITICAL++))
     sleep 0.8                                                                                    
   fi                                                                                             
                                                                                                  

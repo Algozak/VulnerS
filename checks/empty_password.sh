@@ -22,6 +22,7 @@ empty_password() {
   else                                                                    
     echo -e "${RED}    [CRITICAL] Empty passwords found. ${NC}"              
     echo "$empass_var"                                                    
+    ((CRITICAL_COUNT++))
   fi                                                                      
                                                                           
 }                                                                         

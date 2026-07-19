@@ -23,6 +23,7 @@ sudoers() {
     else                                                                                      
         echo -e "${RED}    [CRITICAL] Dangerous NOPASSWD rules detected!${NC}"                    
         echo "$sudo_errors"                                                                   
+        ((CRITICAL_COUNT++))
     fi                                                                                        
                                                                                                                                  
     echo ""                                                                                   

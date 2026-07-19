@@ -60,7 +60,8 @@ search_suid() {
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"               
   else                                                                    
     echo -e "${RED}    [CRITICAL] Vulnerable files with SUID found. \n ${NC}"   
-    echo "$suid_var"                                                      
+    echo "$suid_var"
+    ((CRITICAL_COUNT++))
   fi                                                                      
                                                                           
                        

@@ -18,6 +18,7 @@ wwwsticky() {
   else
     echo -e "${RED}    [CRITICAL] world-writable dirs without sticky bit found. ${NC}"
     echo "$www_var"
+    ((WARNING_COUNT++))
   fi
 
 

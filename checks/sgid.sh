@@ -30,7 +30,8 @@ search_sgid() {
     echo -e "${GREEN}    [OK] No vulnerabilities found. ${NC}"                
   else                                                                     
     echo -e "${RED}    [CRITICAL] Vulnerable files with SGID found. ${NC}"    
-    echo "$sgid_var"                                                       
+    echo "$sgid_var"
+    ((WARNING_COUNT++))
   fi                                                                       
                                                                            
                                                                            

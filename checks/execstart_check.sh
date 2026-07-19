@@ -22,6 +22,7 @@ execstart() {
           echo -e "\n    --- $word\n"
           echo -e "    owner -> $owner , perms -> $perms"
           found_vuln=1
+          ((CRITICAL_COUNT++))
         fi
       fi
     done

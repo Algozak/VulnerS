@@ -10,7 +10,7 @@ acl_check() {
 
   local tmpfile=$(mktemp)
 
-  ( getfacl -Rsp / 2>/dev/null > "$tmpfile" ) &
+  ( uetfacl -Rsp / 2>/dev/null > "$tmpfile" ) &
   spinner $!
 
   acl_var=$(cat "$tmpfile")
