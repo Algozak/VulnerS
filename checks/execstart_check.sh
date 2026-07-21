@@ -1,5 +1,6 @@
 #!/bin/bash
 
+count_files=0
 
 #EcexStart check in units                                                                                  
 execstart() {
@@ -23,6 +24,7 @@ execstart() {
           echo -e "    owner -> $owner , perms -> $perms"
           found_vuln=1
           ((CRITICAL_COUNT++))
+          COEF["exec"]=1
         fi
       fi
     done

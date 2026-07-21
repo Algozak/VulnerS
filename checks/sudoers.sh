@@ -1,5 +1,5 @@
 #!/bin/bash
-
+count_files=0
 # Sudoers configuration                                                                       
 sudoers() {                                                                                   
     echo ""                                                                                   
@@ -24,6 +24,12 @@ sudoers() {
         echo -e "${RED}    [CRITICAL] Dangerous NOPASSWD rules detected!${NC}"                    
         echo "$sudo_errors"                                                                   
         ((CRITICAL_COUNT++))
+        COEF["sudoers"]=1
+
+
+        
+        
+
     fi                                                                                        
                                                                                                                                  
     echo ""                                                                                   

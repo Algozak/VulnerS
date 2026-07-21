@@ -1,7 +1,7 @@
 #!/bin/bash
 
                                                                            
-                                                                                                 
+count_files=0                                                                                                 
 # Writable-units                                                                            
 writable-units() {                                                                               
   echo ""                                                                                        
@@ -22,6 +22,12 @@ writable-units() {
     echo "----- $line"
     done                                                                            
     ((CRITICAL++))
+    
+    COEF["wu"]=1
+
+    
+    
+
     sleep 0.8                                                                                    
   fi                                                                                             
                                                                                                  

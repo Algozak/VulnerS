@@ -1,7 +1,8 @@
 #!/bin/bash
 
 
-
+count_files=0
+coef=0
 # Search SUID files                                                       
 search_suid() {                                                           
   echo ""                                                                 
@@ -62,6 +63,12 @@ search_suid() {
     echo -e "${RED}    [CRITICAL] Vulnerable files with SUID found. \n ${NC}"   
     echo "$suid_var"
     ((CRITICAL_COUNT++))
+    count_files=$(wc -l <<< "$suid_var")
+    coef=$(awk "BEGIN {print the_min = ($count_files/20 < 1) ? $count_files/20 : 1}") 
+    COEF["suid"]=$coef
+    
+    
+
   fi                                                                      
                                                                           
                        

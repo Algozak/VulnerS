@@ -1,5 +1,6 @@
 #!/bin/bash
 
+count_files=0
 #check sticky /tmp                                                     
 echo_sticky_tmp() {                                                    
   echo ""                                                              
@@ -13,6 +14,11 @@ echo_sticky_tmp() {
   else                                                                 
     echo -e "${RED}    sticky bit is missing on /tmp${NC}"                 
     ((WARNING_COUNT++))
+    COEF["sticky"]=1
+    
+    
+
+
   fi                                                                   
 }                                                                      
 

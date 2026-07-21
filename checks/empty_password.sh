@@ -1,4 +1,5 @@
 #!/bin/bash
+count_files=0
 
 # Check for empty password                                                
 empty_password() {                                                        
@@ -23,6 +24,11 @@ empty_password() {
     echo -e "${RED}    [CRITICAL] Empty passwords found. ${NC}"              
     echo "$empass_var"                                                    
     ((CRITICAL_COUNT++))
+    COEF["empty"]=1
+    
+    
+
+
   fi                                                                      
                                                                           
 }                                                                         

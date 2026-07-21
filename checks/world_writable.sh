@@ -1,6 +1,8 @@
 #!/bin/bash
 
  
+count_files=0
+coef=0
 
 # World-writable_files                                                                    
 world_writable() {                                                                        
@@ -20,6 +22,10 @@ world_writable() {
     echo -e "${RED}    [CRITICAL] World-writable files found. \n${NC}"                         
     echo "$wwf_var"
     ((WARNING_COUNT++))
+    count_files=$(wc -l <<< "$wwf_var")
+    coef=$(awk "BEGIN {print the_min = ($count_files/50 < 1) ? $count_files/50 : 1}")
+    COEF["ww"]=$coef
+
     sleep 0.8
   fi                                                                                      
                                                                                           

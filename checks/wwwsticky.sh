@@ -1,7 +1,11 @@
 #!/bin/bash
 
-#world-writable-without sticky bit 
 
+#safe vars
+count_files=0
+coef=0
+
+#world-writable-without sticky bit 
 wwwsticky() {
   echo ""
   echo -e "${YELLOW} [*] Scanning for world-writable dirs without sticky bit...${NC}"
@@ -19,7 +23,8 @@ wwwsticky() {
     echo -e "${RED}    [CRITICAL] world-writable dirs without sticky bit found. ${NC}"
     echo "$www_var"
     ((WARNING_COUNT++))
+    count_files=$(wc -l <<< "$www_var")
+    coef=$(awk "BEGIN {print the_min = ($count_files/20 < 1) ? $count_files/20 : 1}")
+    COEF["wwwsticky"]=$coef
   fi
-
-
 } 

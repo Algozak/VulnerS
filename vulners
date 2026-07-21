@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#Что стоит исправить в скрипте
-#3. Для ACL: не бить тревогу на само наличие ACL, а парсить getfacl 
-#   и искать конкретно опасные права (например others с rwx там, где не должно быть)
-#4. Различать уровни: INFO / WARNING / CRITICAL, а не всё через один CRITICAL
+
+#arrays
+declare -A COEF
+declare -A PENALTY
 
 
 #counters found
@@ -27,6 +27,7 @@ check_root() {
 
 VULNERS_LIB="/usr/share/vulners"
 
+source /etc/vulners/weights.conf
 for check in "$VULNERS_LIB"/checks/*.sh; do
     source "$check"
 done
@@ -88,4 +89,4 @@ main() {
 }
 
 
-main "$1"
+ main "$1"

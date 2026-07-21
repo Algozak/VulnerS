@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source /usr/share/vulners/lib/spinner.sh
+count_files=0
 
 #ACL check
 acl_check() {
@@ -20,6 +21,10 @@ acl_check() {
     echo -e "${RED}    [CRITICAL] Extended ACLs found.${NC}"
     acl_info=$(grep "^# file:" "$tmpfile" | sed 's/# file: //')
     echo "$acl_info"
+    count_files=$(wc -l <<< "$acl_info")
+    coef=$(awk "BEGIN {print the_min = ($count_files/20 < 1) ? $count_files/20 : 1}") 
+    COEF["acl"]=$coef
+
     sleep 0.5
   fi
 

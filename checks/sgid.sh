@@ -1,7 +1,7 @@
 #!/bin/bash                                                                
-                                                                           
-                                                  
-                                                                           
+                                                                                                                           
+ count_files=0
+                                                                          
 # Search SUID files                                                        
 search_sgid() {                                                            
   echo ""                                                                  
@@ -32,6 +32,10 @@ search_sgid() {
     echo -e "${RED}    [CRITICAL] Vulnerable files with SGID found. ${NC}"    
     echo "$sgid_var"
     ((WARNING_COUNT++))
+    count_files=$(wc -l <<< "$sgid_var")
+    coef=$(awk "BEGIN {print the_min = ($count_files/10 < 1) ? $count_files/10 : 1}")
+    COEF["sgid"]=$coef
+    
   fi                                                                       
                                                                            
                                                                            

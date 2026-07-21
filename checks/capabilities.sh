@@ -3,6 +3,9 @@
 #Dangerous Capabilities list                                                                       
 DANGEROUS_CAPS="cap_sys_admin|cap_sys_ptrace|cap_sys_module|cap_dac_override|cap_chown|cap_fowner" 
 
+count_files=0
+coef=0
+
 #check Dangerous Capabilities                                       
 check_capabilities() {                                              
   echo ""                                                           
@@ -21,6 +24,11 @@ check_capabilities() {
     echo -e "\n${RED}    [CRITICAL] Dangerous capabilities found. ${NC} " 
     echo "$cap_res"   
     ((WARNING_COUNT++))
+    count_files=$(wc -l <<< "$cap_res")
+    coef=$(awk "BEGIN {print the_min = ($count_files/10 < 1) ? $count_files/10 : 1}")
+    COEF["cap"]=$coef
+
+    
   fi                                                                
   echo ""                                                           
 }                                                                   

@@ -10,7 +10,8 @@ BUILD_DIR="/tmp/${NAME}-build"
 rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR/${NAME}-${VERSION}"
 
-cp -r "$SCRIPT_DIR"/checks "$SCRIPT_DIR"/lib "$SCRIPT_DIR"/vulners \
+cp -r "$SCRIPT_DIR"/checks "$SCRIPT_DIR"/lib "$SCRIPT_DIR"/config \
+      "$SCRIPT_DIR"/vulners \
       "$SCRIPT_DIR"/LICENSE "$SCRIPT_DIR"/README.md \
       "$BUILD_DIR/${NAME}-${VERSION}/"
 

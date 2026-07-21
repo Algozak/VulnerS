@@ -19,7 +19,9 @@ SUID/SGID, ACL, права sudoers, capabilities, world-writable файлы и �
                                                                                 
 %install                                                                        
 install -Dm755 vulners %{buildroot}%{_bindir}/vulners                           
-                                                                                
+                   
+install -Dm644 config/weights.conf %{buildroot}%{_sysconfdir}/vulners/weights.conf
+
 for f in checks/*.sh; do                                                        
     install -Dm644 "$f" %{buildroot}%{_datadir}/vulners/checks/$(basename "$f") 
 done                                                                            
@@ -33,7 +35,8 @@ done
 %doc README.md                                                                  
 %{_bindir}/vulners                                                              
 %{_datadir}/vulners/checks/*.sh                                                 
-%{_datadir}/vulners/lib/*.sh                                                    
+%{_datadir}/vulners/lib/*.sh                                                   
+%config(noreplace) %{_sysconfdir}/vulners/weights.conf
                                                                                 
 %changelog                                                                      
                                                                                 
