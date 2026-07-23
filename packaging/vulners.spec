@@ -1,6 +1,6 @@
 Name:           vulners                                                         
 Version:        0.1                                                             
-Release:        1%{?dist}                                                       
+Release:        2%{?dist}                                                       
 Summary:        A tool for checking system configuration vulnerabilities        
                                                                                 
 License:        MIT                                                             
@@ -39,7 +39,10 @@ done
 %config(noreplace) %{_sysconfdir}/vulners/weights.conf
                                                                                 
 %changelog                                                                      
-                                                                                
+                 
+* Thu Jul 23 2026 algozak <harutyunyanvazgen10@gmail.com> - 0.1-2
+- Added vulnerability protection score from 0 to 10 (0/10)
+                 
 * Sun Jul 19 2026 algozak <harutyunyanvazgen10@gmail.com> - 0.1-1               
 - First Release                                                                 
                                                                                 
