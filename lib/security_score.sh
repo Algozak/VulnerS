@@ -21,11 +21,9 @@ penalty() {
     for check in "${!COEF[@]}"; do
 
     if [[ -n "${WEIGHT[$check]}" && -n "${COEF[$check]}" ]]; then
-        PENALTY[$check]=$(awk "BEGIN {print \"%.2f\" ${WEIGHT[$check]} * ${COEF[$check]}}")
+        PENALTY[$check]=$(awk "BEGIN {printf \"%.2f\", ${WEIGHT[$check]} * ${COEF[$check]}}")
     fi
-
     done
-
 }
 
 MAX_PENALTY=0
@@ -53,7 +51,7 @@ total_penalty
 
 calculate_score() {
     if (( $(echo "$MAX_PENALTY == 0" | bc -l) )); then
-    SCORE=0
+  SCORE=0
         
     else
         SCORE=$(echo "scale=2; 10 * (1 - $TOTAL_PENALTY / $MAX_PENALTY)" | bc)

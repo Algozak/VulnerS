@@ -3,6 +3,7 @@
 
 #arrays
 declare -A COEF
+declare -A WEIGHT
 declare -A PENALTY
 
 
@@ -53,9 +54,20 @@ run_audit() {
   echo_sticky_tmp
   execstart
   sudoers
-  summary_print
-  
 }
+
+Score_print() {
+  penalty
+  total_penalty
+  max_penalty
+  calculate_score
+
+  summary_print
+
+}
+
+
+
 
 
 main() {
@@ -79,6 +91,7 @@ main() {
       ;;
     "")
       run_audit
+      Score_print
       ;;
     *)
       echo -e "${RED} Error: Unknown argument: '$1'${NC}"

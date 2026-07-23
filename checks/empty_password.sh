@@ -25,10 +25,7 @@ empty_password() {
     echo "$empass_var"                                                    
     ((CRITICAL_COUNT++))
     COEF["empty"]=1
-    
-    
-
-
+      
   fi                                                                      
                                                                           
 }                                                                         

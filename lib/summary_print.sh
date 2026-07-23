@@ -9,4 +9,11 @@ summary_print() {
     echo -e "${YELLOW}Warning:  $WARNING_COUNT${NC}"
     echo -e "${BLUE}Info:     $INFO_COUNT${NC}"
     echo "=================================================="
+    echo ""
+    echo "SCORE: $SCORE"  
+    echo ""
+    echo "==================================================" 
+
 }
+
+
